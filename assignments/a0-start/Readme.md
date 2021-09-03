@@ -2,7 +2,7 @@
 
 ## Sphere2D
 
-![alt text](https://github.com/msunde137/animation-toolkit/screenshots/modify sphere 2d.PNG)
+![alt text](https://github.com/msunde137/animation-toolkit/blob/main/screenshots/modify%20sphere%202d.PNG)
 
 ## Sphere3D
 
