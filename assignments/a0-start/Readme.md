@@ -6,4 +6,4 @@
 
 ## Sphere3D
 
-![alt text](https://github.com/msunde137/animation-toolkit/blob/main/screenshots/sphere3d.gif)
+![alt text](https://github.com/msunde137/animation-toolkit/blob/main/screenshots/ezgif.com-gif-maker.gif)
