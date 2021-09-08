@@ -18,28 +18,30 @@ public:
     }
 
     void update() {
-        deltaTime = atkui::Framework::elapsedTime() - deltaTime;
+        float deltaTime = atkui::Framework::dt();
         if (atkui::Framework::keyIsDown(GLFW_KEY_SPACE))
         {
             if (space == false)
                 randDir = agl::randomUnitSphere();
             space = true;
-            spherePos += randDir * deltaTime * moveSpd;
         }
+        else space = false;
+
+        spherePos += randDir * deltaTime * moveSpd;
+
+
         if (atkui::Framework::keyIsDown(GLFW_KEY_R))
         {
-            space = false;
             spherePos = vec3(0);
+            randDir = vec3(0);
         }
     }
 
 private:
-    vec3 spherePos = vec3(0);
+    vec3 spherePos = vec3(0, 50, 0);
     vec3 randDir = vec3(0);
-    float moveSpd = .5;
+    float moveSpd = 50;
     bool space = false;
-    float deltaTime = 0;
-
 };
 
 int main(int argc, char** argv)
