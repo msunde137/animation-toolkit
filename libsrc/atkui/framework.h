@@ -22,7 +22,7 @@ class Framework : public agl::Window {
   virtual void drawSphere(const glm::vec3& pos, float radius);
   virtual void drawLine(const glm::vec3& a, const glm::vec3& b);
   virtual void drawFloor(float size, float big = 200, float small = 50);
-  bool _type;
+  int _type;
 
  private:
   glm::vec3 _color;

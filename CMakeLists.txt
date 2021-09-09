@@ -1,5 +1,5 @@
 project(atk)
-cmake_minimum_required(VERSION 3.21.0)
+cmake_minimum_required(VERSION 3.16.0)
 
 if (WIN32) # NOTE: Needs testing for optional AntTweakBar
 
@@ -130,6 +130,7 @@ endif()
 include_directories(${INCLUDE_DIRS})
 link_directories(${LIBRARY_DIRS})
 add_subdirectory(assignments)
+add_subdirectory(classexamples)
 add_subdirectory(libsrc)
 #if (IS_DIRECTORY "${PROJECT_SOURCE_DIR}/test")
   #add_subdirectory(test)
