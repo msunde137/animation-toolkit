@@ -30,6 +30,8 @@ class Window {
   Window();
   virtual ~Window();
 
+  GLFWwindow* getWindow() { return _window; }
+
   /**
    * @brief Opens the window and starts the main application loop.
    *

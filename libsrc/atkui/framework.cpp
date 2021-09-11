@@ -68,7 +68,7 @@ void Framework::setColor(const vec3& c) {
 void Framework::drawSphere(const vec3& pos, float radius) {
   renderer.push();
   renderer.translate(pos);
-  renderer.scale(vec3(radius));
+  renderer.scale(vec3(radius * 2)); // needs to me twice the radius if scaled like this!
   renderer.sphere();
   renderer.pop();
 }
