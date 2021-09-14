@@ -8,8 +8,16 @@ TODO: Replace this text with
 
 ## Eyes
 
+![Demo](https://github.com/msunde137/animation-toolkit/tree/main/screenshots/Eyes.gif)
+
 ## Look
+
+![Demo](https://github.com/msunde137/animation-toolkit/tree/main/screenshots/Look.gif)
 
 ## Particles
 
+![Demo](https://github.com/msunde137/animation-toolkit/tree/main/screenshots/Particles.gif)
+
 ## Unique
+
+![Demo](https://github.com/msunde137/animation-toolkit/tree/main/screenshots/Unique.gif)
