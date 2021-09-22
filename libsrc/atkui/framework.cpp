@@ -5,12 +5,13 @@ using glm::vec3;
 
 namespace atkui {
 
-Framework::Framework(Display type) : agl::Window(), _type(type) {
+Framework::Framework(Display type, int screenWidth, int screenHeight) : agl::Window(), _type(type) {
   // Do our own custom setup
+  setWindowSize(screenWidth, screenHeight);
   if (_type == Orthographic) {
 
     float zdim = 1000;
-    ortho(0, width(), 0, height(), -zdim, zdim);
+    ortho(0, screenWidth, 0, screenHeight, -zdim, zdim);
     background(vec3(0.0));
     setCameraEnabled(false); 
 
@@ -65,6 +66,14 @@ void Framework::setColor(const vec3& c) {
   _color = c;
 }
 
+void Framework::drawCube(const glm::vec3& pos, const glm::vec3& size) {
+  renderer.push();
+  renderer.translate(pos);
+  renderer.scale(size);
+  renderer.cube();
+  renderer.pop();
+}
+
 void Framework::drawSphere(const vec3& pos, float radius) {
   renderer.push();
   renderer.translate(pos);
@@ -75,6 +84,38 @@ void Framework::drawSphere(const vec3& pos, float radius) {
 
 void Framework::drawLine(const vec3& a, const vec3& b) {
   renderer.line(a, b, _color, _color);
+}
+
+void Framework::drawTeapot(const vec3& a, float size) {
+  renderer.push();
+  renderer.translate(a);
+  renderer.scale(vec3(size));
+  renderer.teapot();
+  renderer.pop();
+}
+
+void Framework::push() {
+  renderer.push();
+}
+
+void Framework::pop() {
+  renderer.pop();
+}
+
+void Framework::rotate(float angle, const glm::vec3& axis) {
+  renderer.rotate(angle, axis);
+}
+
+void Framework::translate(const glm::vec3& pos) {
+  renderer.translate(pos);
+}
+
+void Framework::scale(const glm::vec3& size) {
+  renderer.scale(size);
+}
+
+void Framework::transform(const atk::trs& trs) {
+  renderer.transform(trs.matrix());
 }
 
 }

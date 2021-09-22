@@ -488,6 +488,44 @@ class Renderer {
       const glm::vec3& c1, const glm::vec3& c2);
 
   /**
+   * @brief Draws text using the current font size and color
+   * @param text The phrase to display
+   * @param x The x-location of the text (left-most point). Range [0, screenwidth]
+   * @param y The y-location of the text (bottom-most point). Range [0, screenheight]
+   *
+   */
+  void text(const std::string& text, float x, float y);
+
+  /**
+   * @brief Set font color for drawing text
+   * @param color A RGBA color with values in range [0,1]
+   *
+   */
+  void fontColor(const glm::vec4& color);
+
+  /**
+   * @brief Set font size for drawing text
+   * @param size The point size of the font
+   *
+   */
+  void fontSize(int s);
+
+  /**
+   * @brief Get the width of a string (font metrics)
+   * @param text The phrase to display
+   * @return The width of the string in screen coordinates
+   *
+   */
+  float textWidth(const std::string& text);
+
+  /**
+   * @brief Get the height of a string (font metrics)
+   * @return The height of the string in screen coordinates
+   *
+   */
+  float textHeight();
+
+  /**
    * @brief Draws a sphere centered at the origin with radius 0.5
    *
    * @verbinclude sphere.cpp
@@ -565,9 +603,11 @@ class Renderer {
   void initBillboards();
   void initLines();
   void initMesh();
+  void initText();
 
  private:
   bool _initialized;
+  BlendMode _blendMode;
 
   // textures
   struct Texture {
@@ -622,6 +662,11 @@ class Renderer {
   GLuint mVboLinePosId;
   GLuint mVboLineColorId;
   GLuint mVaoLineId;
+
+  // Text
+  int _fontNormal;
+  unsigned int _fontColor;
+  float _fontSize;
 };
 
 }  // namespace agl

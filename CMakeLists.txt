@@ -31,7 +31,7 @@ if (WIN32) # NOTE: Needs testing for optional AntTweakBar
   #set_target_properties(a0-sphere2d PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY "PATH=%PATH%;${CMAKE_PREFIX_PATH}/bin")
   set(CMAKE_EXE_LINKER_FLAGS "/NODEFAULTLIB:\"MSVCRT\" /NODEFAULTLIB:\"LIBCMT\"")
 
-  set(CORE agl ${GLEW} ${GLFW} opengl32.lib)
+  set(CORE atkui atk agl ${GLEW} ${GLFW} opengl32.lib)
   set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/bin)
   set(LIBRARY_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/lib)
 
@@ -54,7 +54,7 @@ if (WIN32) # NOTE: Needs testing for optional AntTweakBar
 elseif (APPLE)
 
   set(CMAKE_MACOSX_RPATH 1)
-  set(CMAKE_CXX_FLAGS "-Wall -Wno-deprecated-declarations -Wno-reorder-ctor -Wno-unused-variable -g -stdlib=libc++ -std=c++14")
+  set(CMAKE_CXX_FLAGS "-Wall -Wno-unused-function -Wno-deprecated-declarations -Wno-reorder-ctor -Wno-unused-variable -g -stdlib=libc++ -std=c++14")
   set(LIBRARY_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/lib)
   set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/bin)
   find_library(GL_LIB OpenGL)
@@ -81,12 +81,12 @@ elseif (APPLE)
   #  message("No AntTweakBar")
   #  set(CORE ${GL_LIB} ${GL_GLUT})
   #endif()
-  set(CORE agl ${GL_LIB} ${GLEW} ${GLFW})
+  set(CORE atkui atk agl ${GL_LIB} ${GLEW} ${GLFW})
 
 
 elseif (UNIX)
 
-  set(CMAKE_CXX_FLAGS "-Wall -g -std=c++17 -Wno-comment -Wno-sign-compare -Wno-reorder") 
+  set(CMAKE_CXX_FLAGS "-Wall -g -std=c++17 -Wno-unused-function -Wno-comment -Wno-sign-compare -Wno-reorder") 
   set(LIBRARY_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/lib)
   set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/bin)
 
@@ -123,7 +123,7 @@ elseif (UNIX)
   #  message("No AntTweakBar")
   #  set(CORE GLEW glfw glut GL GLU X11)
   #endif()
-  set(CORE agl GLEW glfw GL GLU X11)
+  set(CORE atkui atk agl GLEW glfw GL GLU X11)
 
 endif()
 
