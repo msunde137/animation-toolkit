@@ -9,17 +9,25 @@ struct controlPoint
 	bool selected;
 };
 
+struct particle
+{
+	vec3 position, color;
+	float radius;
+};
+
 class ParticleCubic : public atkui::Framework {
 
 public:
 	ParticleCubic() : atkui::Framework(atkui::Orthographic) {
+	}
+
+	void setup() {
 		cp1 = { vec3(50, 50, 0), vec3(0,1,1), 10 };
 		cp2 = { vec3(150, 50, 0), vec3(0,1,1), 10 };
 		cp3 = { vec3(50, 150, 0), vec3(0,1,1), 10 };
 		cp4 = { vec3(150, 150, 0), vec3(0,1,1), 10 };
-	}
-
-	void setup() {
+		t = 0;
+		p = { vec3(0), vec3(1), 10 };
 	}
 
 	void scene() {
@@ -43,6 +51,8 @@ public:
 			bezierAlgorithm(cp1, cp2, cp3, cp4, 50);
 		else
 			casteljauAlgorithm(cp1, cp2, cp3, cp4, 50);
+
+		animateParticle(p, .2, t, cp1, cp2, cp3, cp4);
 	}
 
 	void bezierAlgorithm(controlPoint cp1, controlPoint cp2, controlPoint cp3, controlPoint cp4, int steps)
@@ -109,10 +119,29 @@ public:
 		drawSphere(p.position, p.radius);
 	}
 
+	void animateParticle(particle& p, float speed, float& t, controlPoint cp1, controlPoint cp2, controlPoint cp3, controlPoint cp4) 
+	{
+		auto f = [cp1, cp2, cp3, cp4](float t) {
+			return pow((1 - t), 3) * cp1.position + 3 * t * pow((1 - t), 2) * cp2.position + 3 * pow(t, 2) * (1 - t) * cp3.position + pow(t, 3) * cp4.position;
+		};
+
+		float dt = Framework::dt();
+
+		if (t > 1) t = 0;
+		t += dt / 5;
+		p.position = f(t);
+		
+		setColor(p.color);
+		drawSphere(p.position, p.radius);
+	};
+
 private:
 	controlPoint cp1, cp2, cp3, cp4;
 	bool mouseDown = false;
 	bool bez = false;
+
+	particle p;
+	float t;
 
 };
 
