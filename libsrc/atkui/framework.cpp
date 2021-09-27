@@ -86,6 +86,10 @@ void Framework::drawLine(const vec3& a, const vec3& b) {
   renderer.line(a, b, _color, _color);
 }
 
+void Framework::drawText(const std::string& msg, float x, float y) {
+  renderer.text(msg, x, y);
+}
+
 void Framework::drawTeapot(const vec3& a, float size) {
   renderer.push();
   renderer.translate(a);

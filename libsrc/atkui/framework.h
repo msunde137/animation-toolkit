@@ -30,6 +30,7 @@ class Framework : public agl::Window {
   virtual void drawSphere(const glm::vec3& pos, float radius);
   virtual void drawLine(const glm::vec3& a, const glm::vec3& b);
   virtual void drawFloor(float size, float big = 200, float small = 50);
+  virtual void drawText(const std::string& msg, float x, float y); // x in [0, width]; y in [0, height]
   bool _type;
 
  private:

@@ -7,6 +7,8 @@ Helpful Links:
 * [CS317 course website](https://brynmawr-cs317-f21.github.io/website/)
 * [Assignment 00: Hello CS317](https://brynmawr-cs317-f21.github.io/website/asst00.html)
 * [Assignment 01: Hello Animation](https://brynmawr-cs317-f21.github.io/website/asst01-hello.html)
+* [Assignment 02: Howl's moving casteljau](https://brynmawr-cs317-f21.github.io/website/asst02-interpolation.html)
+* [Assignment 03: The Catmull-ROM COM](https://brynmawr-cs317-f21.github.io/website/asst03-splines.html)
 
 # Tools and dependencies
 
