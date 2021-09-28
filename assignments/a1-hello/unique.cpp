@@ -16,9 +16,9 @@ class Unique : public atkui::Framework {
 
   virtual void setup() {
 
-	  winx = 0;
-	  winy = 0;
-	  glfwGetWindowPos(atkui::Framework::getWindow(), &winx, &winy);
+	  //winx = 0;
+	  //winy = 0;
+	  //glfwGetWindowPos(atkui::Framework::getWindow(), &winx, &winy);
 
 	  gravity = -300;
 	  drag = .05;
