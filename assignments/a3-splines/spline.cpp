@@ -96,15 +96,16 @@ void Spline::editControlPoint(int id, const glm::vec3& v) {
 }
 
 glm::vec3 Spline::getValue(float t) const {
-  if (mDirty) 
-  {
-    mInterpolator->computeControlPoints(mKeys);
-    mDirty = false;
-  }
+    if (mDirty) 
+    {
 
-  // todo: your code here
-  // compute the segment containing t
-  // compute the value [0, 1] along the segment for interpolation
-  return glm::vec3(0); 
+        mInterpolator->computeControlPoints(mKeys);
+        mDirty = false;
+    }
+
+    // todo: your code here
+    // compute the segment containing t
+    // compute the value [0, 1] along the segment for interpolation
+    return glm::vec3(0); 
 }
 
