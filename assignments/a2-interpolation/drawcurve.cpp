@@ -49,7 +49,7 @@ public:
 	{
 		// function p(t)
 		auto p = [cp1, cp2, cp3, cp4](float t) {
-			return pow((1 - t), 3) * cp1.position + 3 * t * pow((1 - t), 2) * cp2.position + 3 * pow(t, 2) * (1 - t) * cp3.position + pow(t, 3) * cp4.position;
+			return (float)pow((1 - t), 3) * cp1.position + 3 * t * (float)pow((1 - t), 2) * cp2.position + 3 * (float)pow(t, 2) * (1 - t) * cp3.position + (float)pow(t, 3) * cp4.position;
 		};
 
 		setColor(vec3(1, 1, 0));

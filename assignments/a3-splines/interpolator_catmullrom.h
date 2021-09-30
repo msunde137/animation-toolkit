@@ -24,7 +24,7 @@ public:
 
         // function p(t)
         auto p = [cp1, cp2, cp3, cp4](float t) {
-            return pow((1 - t), 3) * cp1 + 3 * t * pow((1 - t), 2) * cp2 + 3 * pow(t, 2) * (1 - t) * cp3 + pow(t, 3) * cp4;
+            return (float)pow((1 - t), 3) * cp1 + 3 * t * (float)pow((1 - t), 2) * cp2 + 3 * (float)pow(t, 2) * (1 - t) * cp3 + (float)pow(t, 3) * cp4;
         };
 
         return p(u);
