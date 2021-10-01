@@ -104,10 +104,9 @@ glm::vec3 Spline::getValue(float t) const {
 
     // get segment
     int segment = 0;
-    while (getTime(segment) < t - 1.0f)
-    {
+    
+    while (getNumKeys() > segment && (getTime(segment) > t || getTime(segment+1) <= t))
         segment++;
-    }
 
     // interpolate
     return mInterpolator->interpolate(segment, t - segment);
