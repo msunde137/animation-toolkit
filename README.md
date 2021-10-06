@@ -9,6 +9,7 @@ Helpful Links:
 * [Assignment 01: Hello Animation](https://brynmawr-cs317-f21.github.io/website/asst01-hello.html)
 * [Assignment 02: Howl's moving casteljau](https://brynmawr-cs317-f21.github.io/website/asst02-interpolation.html)
 * [Assignment 03: The Catmull-ROM COM](https://brynmawr-cs317-f21.github.io/website/asst03-splines.html)
+* [Assignment 04: You spin me round](https://brynmawr-cs317-f21.github.io/website/asst04-euler.html)
 
 # Tools and dependencies
 

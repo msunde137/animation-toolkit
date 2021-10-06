@@ -25,10 +25,14 @@ class Framework : public agl::Window {
   virtual void translate(const glm::vec3& pos);
   virtual void scale(const glm::vec3& size);
   virtual void transform(const atk::trs& trs);
+  virtual void transform(const glm::mat4& trs);
   virtual void drawTeapot(const glm::vec3& pos, float size);
   virtual void drawCube(const glm::vec3& pos, const glm::vec3& size);
   virtual void drawSphere(const glm::vec3& pos, float radius);
   virtual void drawLine(const glm::vec3& a, const glm::vec3& b);
+  virtual void drawCone(const glm::vec3& pos, float size);
+  virtual void drawTorus(const glm::vec3& pos, float size);
+  virtual void drawCylinder(const glm::vec3& pos, float size);
   virtual void drawFloor(float size, float big = 200, float small = 50);
   virtual void drawText(const std::string& msg, float x, float y); // x in [0, width]; y in [0, height]
   bool _type;

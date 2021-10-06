@@ -68,6 +68,7 @@ void CurveEditor::addPoint(const glm::vec3& p) {
 }
 
 void CurveEditor::deletePoint(int key) {
+  if (mShowControlPoints) return;
   mSpline.deleteKey(key);
 }
 
