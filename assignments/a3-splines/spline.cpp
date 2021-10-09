@@ -35,10 +35,10 @@ void Spline::editKey(int keyID, const glm::vec3& value) {
 }
 
 int Spline::appendKey(float time, const glm::vec3& value) {
-  mKeys.push_back(value);
-  mTimes.push_back(time);
-  mDirty = true;
-  return mKeys.size();
+    mKeys.push_back(value);
+    mTimes.push_back(time);
+    mDirty = true;
+    return mKeys.size();
 }
 
 void Spline::deleteKey(int keyID) {
@@ -104,11 +104,16 @@ glm::vec3 Spline::getValue(float t) const {
 
     // get segment
     int segment = 0;
-    
-    while (getNumKeys() > segment && (getTime(segment) > t || getTime(segment+1) <= t))
+    while (getTime(segment) <= t)
         segment++;
+    segment--;
+
+    if (segment >= mKeys.size())
+        segment = mKeys.size() - 1;
+    else if (segment <= 0)
+        segment = 0;
 
     // interpolate
-    return mInterpolator->interpolate(segment, t - segment);
+    return mInterpolator->interpolate(segment, t - getTime(segment));
 }
 

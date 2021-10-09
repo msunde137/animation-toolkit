@@ -185,7 +185,6 @@ void TestEulerToMatrix_XZY()
        0.43301, -0.86603, -0.25000,
        0.17678,  0.35355, -0.91856,
        0.88388,  0.35355,  0.30619);
-               
     EXPECT_EQ(m, R);
 
     std::cout << "Rxzy: matrix to euler\n";

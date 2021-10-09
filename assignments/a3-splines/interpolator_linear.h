@@ -15,7 +15,8 @@ public:
     InterpolatorLinear() : Interpolator("Linear") {}
     virtual glm::vec3 interpolate(int segment, double u) const
     {
-        if (u < 0 || u > 1 || mCtrlPoints.size() <= segment + 1) return glm::vec3(0);
+        u = glm::max(glm::min(u, 1.0), 0.0);
+        if (mCtrlPoints.size() <= 1) return glm::vec3(0);
         return (1.0f - (float)u) * mCtrlPoints[segment] + (float)u * mCtrlPoints[segment + 1];
     }
 

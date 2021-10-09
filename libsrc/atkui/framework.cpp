@@ -68,8 +68,8 @@ void Framework::setColor(const vec3& c) {
 
 void Framework::drawCube(const glm::vec3& pos, const glm::vec3& size) {
   renderer.push();
-  renderer.translate(pos);
-  renderer.scale(size);
+  //renderer.translate(pos);
+  //renderer.scale(size);
   renderer.cube();
   renderer.pop();
 }
