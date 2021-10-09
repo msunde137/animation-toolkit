@@ -82,6 +82,31 @@ void Framework::drawSphere(const vec3& pos, float radius) {
   renderer.pop();
 }
 
+void Framework::drawCone(const glm::vec3& pos, float size) {
+  renderer.push();
+  renderer.translate(pos);
+  renderer.scale(vec3(size));
+  renderer.cone();
+  renderer.pop();
+
+}
+
+void Framework::drawTorus(const glm::vec3& pos, float size) {
+  renderer.push();
+  renderer.translate(pos);
+  renderer.scale(vec3(size));
+  renderer.torus();
+  renderer.pop();
+}
+
+void Framework::drawCylinder(const glm::vec3& pos, float size) {
+  renderer.push();
+  renderer.translate(pos);
+  renderer.scale(vec3(size));
+  renderer.cylinder();
+  renderer.pop();
+}
+
 void Framework::drawLine(const vec3& a, const vec3& b) {
   renderer.line(a, b, _color, _color);
 }
@@ -120,6 +145,10 @@ void Framework::scale(const glm::vec3& size) {
 
 void Framework::transform(const atk::trs& trs) {
   renderer.transform(trs.matrix());
+}
+
+void Framework::transform(const glm::mat4& trs) {
+  renderer.transform(trs);
 }
 
 }

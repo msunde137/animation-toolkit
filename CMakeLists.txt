@@ -123,7 +123,7 @@ elseif (UNIX)
   #  message("No AntTweakBar")
   #  set(CORE GLEW glfw glut GL GLU X11)
   #endif()
-  set(CORE atkui atk agl GLEW glfw GL GLU X11)
+  set(CORE atkui atk agl GLEW glfw GL GLU X11 dl)
 
 endif()
 

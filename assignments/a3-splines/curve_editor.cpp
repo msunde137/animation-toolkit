@@ -31,6 +31,8 @@ void CurveEditor::setup() {
 void CurveEditor::scene() {
   drawState();
 
+
+
     if (mShowControlPoints && mSpline.getNumControlPoints() > 1 && mMode != REMOVE)
     {
         for (int i = 0; i < mSpline.getNumControlPoints(); i++)
@@ -66,8 +68,8 @@ void CurveEditor::addPoint(const glm::vec3& p) {
 }
 
 void CurveEditor::deletePoint(int key) {
-    if (key < 0) return;
-    mSpline.deleteKey(key);
+  if (mShowControlPoints) return;
+  mSpline.deleteKey(key);
 }
 
 void CurveEditor::drawState() {
@@ -101,7 +103,7 @@ void CurveEditor::mouseMotion(int pX, int pY, int dx, int dy) {
   
   if (mButtonState == GLFW_MOUSE_BUTTON_LEFT) {
     vec3 p = vec3(pX, height() - pY, 0);
-    if (mShowControlPoints && mMode != REMOVE) {
+    if (mShowControlPoints) {
       if (mSpline.getInterpolationType() == "Hermite" && mSelected % 2 == 1) {
         mSpline.editControlPoint(mSelected, p-mSpline.getControlPoint(mSelected-1));
       } else {
