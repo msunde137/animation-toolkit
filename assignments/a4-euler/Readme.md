@@ -1,7 +1,5 @@
 # Readme
 
-TODO: Replace this text with
+Added functionality to rotate objects in the direction of bezier curves.
 
-* images, gifs, videos
-* brief description of what each image/gif/video shows
-
+![Demo](https://github.com/msunde137/animation-toolkit/blob/main/screenshots/bezier%20rotation.PNG)
