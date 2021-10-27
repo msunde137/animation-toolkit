@@ -8,6 +8,7 @@ namespace atkui {
 Framework::Framework(Display type, int screenWidth, int screenHeight) : agl::Window(), _type(type) {
   // Do our own custom setup
   setWindowSize(screenWidth, screenHeight);
+  renderer.loadShader("sprite2d", "../shaders/sprite.vs", "../shaders/sprite.fs");
   if (_type == Orthographic) {
 
     float zdim = 1000;
@@ -64,6 +65,30 @@ void Framework::drawFloor(float size, float big, float small) {
 void Framework::setColor(const vec3& c) {
   renderer.setUniform("Material.diffuse", c);
   _color = c;
+}
+
+void Framework::drawEllipsoid(const glm::vec3& a, const glm::vec3& b, float radius) {
+  vec3 direction = b - a; 
+  float len = length(direction);
+  if (len < radius) {
+    drawSphere(a, radius);
+    return;
+  }
+
+  vec3 scale = vec3(radius, radius, len);
+  vec3 Z = direction/len;
+  vec3 X = glm::vec3(1,0,0);
+  vec3 Y = cross(Z, X); 
+  X = cross(Y, Z);
+
+  glm::mat3 rot(X, Y, Z);
+  vec3 center = a + 0.5f * direction;
+  atk::Transform TRS(glm::normalize(glm::quat(rot)), center, scale);
+
+  renderer.push();
+  renderer.transform(TRS.matrix());
+  renderer.sphere();
+  renderer.pop();
 }
 
 void Framework::drawCube(const glm::vec3& pos, const glm::vec3& size) {

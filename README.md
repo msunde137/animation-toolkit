@@ -10,6 +10,8 @@ Helpful Links:
 * [Assignment 02: Howl's moving casteljau](https://brynmawr-cs317-f21.github.io/website/asst02-interpolation.html)
 * [Assignment 03: The Catmull-ROM COM](https://brynmawr-cs317-f21.github.io/website/asst03-splines.html)
 * [Assignment 04: You spin me round](https://brynmawr-cs317-f21.github.io/website/asst04-euler.html)
+* [Assignment 05: Quazy quaternions](https://brynmawr-cs317-f21.github.io/website/asst05-quat.html)
+* [Assignment 06: Building character](https://brynmawr-cs317-f21.github.io/website/asst06-transform.html)
 
 # Tools and dependencies
 

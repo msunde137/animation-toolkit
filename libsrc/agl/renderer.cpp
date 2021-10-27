@@ -345,7 +345,7 @@ void Renderer::sprite(const glm::vec3& pos,
     const glm::vec4& color, float size) {
   assert(_initialized);
 
-  mat4 mvp = _projectionMatrix * _viewMatrix;
+  mat4 mvp = _projectionMatrix * _viewMatrix * _trs;
   setUniform("MVP", mvp);
   setUniform("CameraPos", _lookfrom);
   setUniform("Offset", pos);
@@ -513,6 +513,12 @@ void Renderer::setUniform(const std::string& name, const glm::mat4 &m) {
 void Renderer::setUniform(const std::string& name, const glm::mat3 &m) {
   assert(_currentShader != nullptr);
   _currentShader->setUniform(name.c_str(), m);
+}
+
+void Renderer::setUniform(const std::string& name, 
+  const std::vector<glm::mat4> &ms) {
+  assert(_currentShader != nullptr);
+  _currentShader->setUniform(name.c_str(), ms);
 }
 
 void Renderer::setUniform(const std::string& name, float val) {

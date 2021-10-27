@@ -35,6 +35,7 @@ class Framework : public agl::Window {
   virtual void drawCylinder(const glm::vec3& pos, float size);
   virtual void drawFloor(float size, float big = 200, float small = 50);
   virtual void drawText(const std::string& msg, float x, float y); // x in [0, width]; y in [0, height]
+  virtual void drawEllipsoid(const glm::vec3& a, const glm::vec3& b, float width); 
   bool _type;
 
  private:

@@ -13,6 +13,6 @@ out vec4 color;
 
 void main()
 {
-  color.rgb = Material.diffuse;
+  color = vec4(Material.diffuse,1.0);
   gl_Position = MVP * vec4(vPositions, 1.0);
 }
