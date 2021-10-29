@@ -2,7 +2,6 @@
 #define ATKMATH_QUATERNION_H_
 
 #include <iostream>
-#include "atkmath/quaternion.h"
 #include "atkmath/matrix3.h"
 #include "atkmath/vector3.h"
 

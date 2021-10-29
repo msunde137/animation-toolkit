@@ -2,6 +2,7 @@
 #include <algorithm>
 
 using glm::vec3;
+using namespace atkmath;
 
 namespace atkui {
 
@@ -91,10 +92,15 @@ void Framework::drawEllipsoid(const glm::vec3& a, const glm::vec3& b, float radi
   renderer.pop();
 }
 
-void Framework::drawCube(const glm::vec3& pos, const glm::vec3& size) {
+void Framework::drawCube(const glm::vec3& pos, const glm::vec3& size, const Quaternion& rot) {
   renderer.push();
-  //renderer.translate(pos);
-  //renderer.scale(size);
+
+  double angle;
+  vec3 axis;
+  
+  
+  renderer.translate(pos);
+  renderer.scale(size);
   renderer.cube();
   renderer.pop();
 }
@@ -113,7 +119,6 @@ void Framework::drawCone(const glm::vec3& pos, float size) {
   renderer.scale(vec3(size));
   renderer.cone();
   renderer.pop();
-
 }
 
 void Framework::drawTorus(const glm::vec3& pos, float size) {

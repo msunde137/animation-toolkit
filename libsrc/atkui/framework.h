@@ -4,6 +4,7 @@
 #include "atk/toolkit.h"
 #include "agl/window.h"
 #include "agl/aglm.h"
+#include "atkmath/quaternion.h"
 #include <vector>
 
 namespace atkui {
@@ -27,7 +28,7 @@ class Framework : public agl::Window {
   virtual void transform(const atk::trs& trs);
   virtual void transform(const glm::mat4& trs);
   virtual void drawTeapot(const glm::vec3& pos, float size);
-  virtual void drawCube(const glm::vec3& pos, const glm::vec3& size);
+  virtual void drawCube(const glm::vec3& pos, const glm::vec3& size, const atkmath::Quaternion& rot = atkmath::Quaternion::Identity);
   virtual void drawSphere(const glm::vec3& pos, float radius);
   virtual void drawLine(const glm::vec3& a, const glm::vec3& b);
   virtual void drawCone(const glm::vec3& pos, float size);

@@ -8,8 +8,8 @@ using namespace std;
 
 namespace atkmath {
 
-Quaternion Quaternion::Zero;
-Quaternion Quaternion::Identity(0,0,0,1);
+Quaternion Quaternion::Zero = Quaternion();
+Quaternion Quaternion::Identity = Quaternion(0,0,0,1);
 
 Quaternion::Quaternion()
 {
