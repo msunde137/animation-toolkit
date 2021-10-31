@@ -1,7 +1,8 @@
 # Readme
 
-TODO: Replace this text with
+# Unique
 
-* images, gifs, videos
-* brief description of what each image/gif/video shows
+Tried to make grass waving in the wind, and implemented some imgui code.
+
+![alt text](https://github.com/msunde137/animation-toolkit/blob/main/screenshots/grass.gif)
 
