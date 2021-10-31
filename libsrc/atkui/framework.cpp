@@ -43,9 +43,9 @@ void Framework::draw() {
     renderer.endShader();
   }
 
-  if (_type == Perspective) {
-    drawFloor(2000, 20, 50);
-  } 
+  //if (_type == Perspective) {
+  //  drawFloor(2000, 20, 50);
+  //} 
 
 }
 

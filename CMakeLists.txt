@@ -31,7 +31,7 @@ if (WIN32) # NOTE: Needs testing for optional AntTweakBar
   #set_target_properties(a0-sphere2d PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY "PATH=%PATH%;${CMAKE_PREFIX_PATH}/bin")
   set(CMAKE_EXE_LINKER_FLAGS "/NODEFAULTLIB:\"MSVCRT\" /NODEFAULTLIB:\"LIBCMT\"")
 
-  set(CORE atkui atk agl ${GLEW} ${GLFW} opengl32.lib)
+  set(CORE atkui atk agl atkmath ${GLEW} ${GLFW} opengl32.lib)
   set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/bin)
   set(LIBRARY_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/lib)
 
