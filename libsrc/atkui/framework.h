@@ -17,8 +17,10 @@ class Framework : public agl::Window {
 
  protected:
   virtual void scene() {} // override to update and draw custom components
-
   virtual void draw() override;
+  bool _type;
+
+ public:
   virtual void setColor(const glm::vec3& c);
   virtual void push();
   virtual void pop();
@@ -37,7 +39,6 @@ class Framework : public agl::Window {
   virtual void drawFloor(float size, float big = 200, float small = 50);
   virtual void drawText(const std::string& msg, float x, float y); // x in [0, width]; y in [0, height]
   virtual void drawEllipsoid(const glm::vec3& a, const glm::vec3& b, float width); 
-  bool _type;
 
  private:
   glm::vec3 _color;
