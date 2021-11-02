@@ -42,7 +42,7 @@ public:
           glm::quat q1 = p->getLocalRotation();
           angle += Framework::dt() * .2;
           glm::quat q2 = glm::angleAxis(
-              std::sin(angle + i) * (float)std::_Pi / 4.0f,
+              std::sin(angle + i) * (float)3.14159 / 4.0f,
               vec3(0, 0, 1));
           p->setLocalRotation(q2);
           

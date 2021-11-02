@@ -26,14 +26,14 @@ public:
 
       // Question 1 - B2
       vec3 d20 = vec3(4, 0, 2);
-      quat R20 = glm::angleAxis((float)std::_Pi / 4.0f, vec3(0,0,1));
+      quat R20 = glm::angleAxis((float)3.14159 / 4.0f, vec3(0,0,1));
       Transform F20(R20, d20); // transform from frame 2 to world
       setColor(vec3(0.5,0, 0.5));
       drawBox(F20);
 
       // Question 1 - B3
       vec3 d30 = vec3(5, 4, 2);
-      quat R30 = glm::angleAxis((float)std::_Pi / 2.0f, vec3(0,0,1));
+      quat R30 = glm::angleAxis((float)3.14159 / 2.0f, vec3(0,0,1));
       Transform F30(R30, d30); // transform from frame 3 to world
       setColor(vec3(0.0, 0.5,0.5));
       drawBox(F30);

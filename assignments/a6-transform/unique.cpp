@@ -90,7 +90,7 @@ public:
                 //angle = windSpeed * std::cos(angle) / 1000.0f - grassRigidity * std::sin(angle) / 1000.0f;
                 angle += Framework::dt() * windSpeed / 1000.0f;
                 float s = abs(std::sin(angle + windVariance / 1000.0f * tentacles[k].getRoot()->getGlobalTranslation().x));
-                glm::quat q2 = glm::angleAxis(s * (float)std::_Pi * windSpeed / 1000.0f, vec3(0, 0, 1));
+                glm::quat q2 = glm::angleAxis(s * (float)3.14159 * windSpeed / 1000.0f, vec3(0, 0, 1));
 
                 p->setLocalRotation(glm::slerp(q1, q2, Framework::dt() * 4.0f));
 

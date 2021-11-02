@@ -142,7 +142,7 @@ public:
 		renderer.translate(p.position);
 		renderer.scale(vec3(30));
 		vec3 slope = fp(t);
-		rotate((float)std::atan(slope.y / slope.x) + std::_Pi / 4, vec3(0, 0, 1));
+		rotate((float)std::atan(slope.y / slope.x) + 3.14159 / 4.0, vec3(0, 0, 1));
 		drawCube(p.position, vec3(30));
 	};
 

@@ -16,13 +16,13 @@ Vector3 Matrix3::toEulerAnglesXYZ() const
 	if (NEAR_0(this->m13 - 1))
 	{
 		x = std::acos(this->m22);
-		y = std::_Pi / 2.0;
+		y = 3.14159 / 2.0;
 		z = 0;
 	}
 	else if (NEAR_0(this->m13 + 1))
 	{
 		x = -std::acos(this->m22);
-		y = -std::_Pi / 2.0;
+		y = -3.14159 / 2.0;
 		z = 0;
 	}
 	else
@@ -45,13 +45,13 @@ Vector3 Matrix3::toEulerAnglesXZY() const
 	{
 		x = std::acos(this->m33);
 		y = 0;
-		z = -std::_Pi / 2.0;
+		z = -3.14159 / 2.0;
 	}
 	else if (NEAR_0(this->m12 + 1))
 	{
 		x = std::acos(this->m33);
 		y = 0;
-		z = std::_Pi / 2.0;
+		z = 3.14159 / 2.0;
 	}
 	else
 	{
@@ -73,13 +73,13 @@ Vector3 Matrix3::toEulerAnglesYXZ() const
 	{
 		z = -std::acos(this->m11);
 		y = 0;
-		x = -std::_Pi / 2.0;
+		x = -3.14159 / 2.0;
 	}
 	else if (NEAR_0(this->m23 + 1))
 	{
 		z = std::acos(this->m11);
 		y = 0;
-		x = std::_Pi / 2.0;
+		x = 3.14159 / 2.0;
 	}
 	else
 	{
@@ -101,13 +101,13 @@ Vector3 Matrix3::toEulerAnglesYZX() const
 	{
 		x = std::acos(this->m33);
 		y = 0;
-		z = std::_Pi / 2.0;
+		z = 3.14159 / 2.0;
 	}
 	else if (NEAR_0(this->m21 + 1))
 	{
 		x = std::acos(this->m33);
 		y = 0;
-		z = -std::_Pi / 2.0;
+		z = -3.14159 / 2.0;
 	}
 	else
 	{
@@ -129,13 +129,13 @@ Vector3 Matrix3::toEulerAnglesZXY() const
 	{
 		z = -std::acos(this->m23);
 		y = 0;
-		x = std::_Pi / 2.0;
+		x = 3.14159 / 2.0;
 	}
 	else if (NEAR_0(this->m32 + 1))
 	{
 		z = std::acos(this->m23);
 		y = 0;
-		x = -std::_Pi / 2.0;	
+		x = -3.14159 / 2.0;	
 	}
 	else
 	{
@@ -157,13 +157,13 @@ Vector3 Matrix3::toEulerAnglesZYX() const
 	{
 		z = std::acos(this->m22);
 		x = 0;
-		y = -std::_Pi / 2.0;
+		y = -3.14159 / 2.0;
 	}
 	else if (NEAR_0(this->m31 + 1))
 	{
 		z = std::acos(this->m22);
 		x = 0;
-		y = std::_Pi / 2.0;
+		y = 3.14159 / 2.0;
 	}
 	else
 	{

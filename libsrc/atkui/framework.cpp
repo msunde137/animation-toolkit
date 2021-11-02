@@ -96,10 +96,10 @@ void Framework::drawCube(const glm::vec3& pos, const glm::vec3& size, const Quat
   renderer.push();
 
   double angle;
-  vec3 axis;
-  
-  
+  Vector3 axis;
+  rot.toAxisAngle(axis, angle);
   renderer.translate(pos);
+  renderer.rotate(angle, vec3(axis.x(), axis.y(), axis.z()));
   renderer.scale(size);
   renderer.cube();
   renderer.pop();
