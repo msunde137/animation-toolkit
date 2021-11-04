@@ -18,12 +18,20 @@ public:
       skeleton.addJoint(body);
 
       Joint* lwing = new Joint("LWing");
-      lwing->setLocalTranslation(vec3(0.1,0,0)*100.0f);
+      lwing->setLocalTranslation(vec3(0));
       skeleton.addJoint(lwing, body);
 
       Joint* rwing = new Joint("RWing");
-      rwing->setLocalTranslation(vec3(-0.1,0,0)*100.0f);
+      rwing->setLocalTranslation(vec3(0));
       skeleton.addJoint(rwing, body);
+
+      Joint* lwing2 = new Joint("LWing2");
+      lwing2->setLocalTranslation(vec3(-210, 0, 0));
+      skeleton.addJoint(lwing2, lwing);
+
+      Joint* rwing2 = new Joint("RWing2");
+      rwing2->setLocalTranslation(vec3(210,0,0));
+      skeleton.addJoint(rwing2, rwing);
 
       skeleton.fk();
    }
@@ -35,26 +43,36 @@ public:
 
       Joint* rwing = skeleton.getByName("RWing");
       rwing->setLocalRotation(glm::angleAxis(-sin(elapsedTime()), vec3(0,0,1))); 
+
+      Joint* lwing2 = skeleton.getByName("LWing2");
+      lwing2->setLocalRotation(glm::angleAxis(sin(elapsedTime() - 1), vec3(0, 0, 1)));
+
+      Joint* rwing2 = skeleton.getByName("RWing2");
+      rwing2->setLocalRotation(glm::angleAxis(-sin(elapsedTime() - 1), vec3(0, 0, 1)));
       skeleton.fk();
 
       // attach geometry to skeleton 
       Transform B = body->getLocal2Global(); 
       Transform LT = lwing->getLocal2Global(); 
       Transform RT = rwing->getLocal2Global(); 
+      Transform LT2 = lwing2->getLocal2Global();
+      Transform RT2 = rwing2->getLocal2Global();
 
       // draw body
       Transform bodyGeometry(
          glm::angleAxis(glm::pi<float>()*0.5f, vec3(1,0,0)), // rotation
          vec3(0), vec3(25, 200, 25)); // position, scale
+      body->setLocalRotation(glm::angleAxis(elapsedTime(), vec3(0, 1, 0)));
+      body->setLocalTranslation(vec3(-cos(elapsedTime()), 0, sin(elapsedTime())) * 200.0f);
 
       Transform lwingGeometry(
          eulerAngleRO(XYZ, vec3(0,0,0)),
-         vec3(-80,0,0), 
+         vec3(-100,0,0), 
          vec3(120,20,200));
 
       Transform rwingGeometry(
          eulerAngleRO(XYZ, vec3(0,0,0)),
-         vec3(80,0,0), 
+         vec3(100,0,0), 
          vec3(120,20,200));
 
       setColor(vec3(0.4, 0.4, 0.8));
@@ -69,11 +87,23 @@ public:
       drawSphere(vec3(0), 1);
       pop();
 
+      push();
+      transform(LT2 * lwingGeometry);
+      drawSphere(vec3(0), 1);
+      pop();
+
       setColor(vec3(0, 0.8, 0.0));
       push();
       transform(RT * rwingGeometry);
       drawSphere(vec3(0), 1);
       pop();
+      
+
+      push();
+      transform(RT2 * rwingGeometry);
+      drawSphere(vec3(0), 1);
+      pop();
+
    }
 
 private:

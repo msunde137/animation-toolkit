@@ -22,11 +22,27 @@ public:
       vec3 color = vec3(1,0,0);
       float size = 1.0f;
       _devil = Devil(position, color, size);
+
+      for (int i = 0; i < 4; i++)
+      {
+          for (int j = 0; j < 3; j++)
+          {
+              positions.push_back(vec3(i - 2, 0, j - 1));
+              colors.push_back(agl::randomUnitCube() + vec3(.5));
+              sizes.push_back(agl::randomUnitCube() + vec3(1));
+          }
+      }
    }
 
    virtual void scene() {
       if (!_paused) _motion.update(_skeleton, elapsedTime());
-      _devil.draw(_skeleton, *this);
+      for (int i = 0; i < positions.size(); i++)
+      {
+          translate(positions[i] * 100.0f);
+          scale(sizes[i]);
+          setColor(colors[i]);
+          _devil.draw(_skeleton, *this);
+      }
    }
 
    virtual void keyUp(int key, int mods) {
@@ -38,6 +54,10 @@ protected:
    Skeleton _skeleton;
    bool _paused = false;
    Devil _devil;
+
+   std::vector<vec3> colors;
+   std::vector<vec3> sizes;
+   std::vector<vec3> positions;
 };
 
 int main(int argc, char** argv) {
