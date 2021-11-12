@@ -61,6 +61,9 @@ public:
     Pose getPose() const;
 
 protected:
+    void deepCopy(const Skeleton& skeleton);
+
+protected:
     std::vector<Joint*> mJoints;
     Joint* mRoot;
 };

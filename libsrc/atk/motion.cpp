@@ -7,6 +7,26 @@ Motion::Motion(double fps) :
   mFps(fps) {
 }
 
+Motion::Motion(const Motion& m) {
+  deepCopy(m);
+} 
+
+Motion& Motion::operator=(const Motion& m) {
+  if (&m != this) {
+    deepCopy(m);
+  }
+  return *this;
+}
+
+void Motion::deepCopy(const Motion& m) {
+  mDt = m.mDt;
+  mFps = m.mFps;
+  mKeys.clear();
+  for (int i = 0; i < m.mKeys.size(); i++) {
+    mKeys.push_back(m.getKey(i));
+  }
+}
+
 Motion::~Motion() {
 }
 
@@ -77,6 +97,7 @@ int Motion::getKeyID(double t) const {
 
 Pose Motion::getValue(double t, bool loop) const {
   if (mKeys.size() == 0) return Pose();
+  if (mKeys.size() == 1) return mKeys[0];
 
   if (loop) {
     t = getNormalizedDuration(t) * getDuration();
@@ -87,9 +108,6 @@ Pose Motion::getValue(double t, bool loop) const {
 
   int segment = (int)(t / mDt); // assumes uniform spacing
   double u = (t - segment*mDt)/mDt;
-  //int sm1 = std::max<int>(segment-1, 0);
-  //int sp1 = std::min<int>(segment+2, mKeys.size()-1);
-  //return Pose::Squad(mKeys[sm1], mKeys[segment], mKeys[segment+1], mKeys[sp1], u); 
   return Pose::Lerp(mKeys[segment], mKeys[segment+1], u); 
 }
 }

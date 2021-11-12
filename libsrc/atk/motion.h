@@ -16,6 +16,9 @@ class Motion
 {
 public:
     Motion(double fps = 120.0);
+    Motion(const Motion& m); // deep copy
+    Motion& operator=(const Motion& m); // deep copy
+
     virtual ~Motion();
 
     // set/get framerate
@@ -66,6 +69,9 @@ public:
     // returns the interval containing t
     // this interval will be between key and (key+1)
     int getKeyID(double t) const;
+
+protected:
+    void deepCopy(const Motion& m);
 
 protected:
     double mDt;

@@ -79,6 +79,17 @@ namespace atk
     return xyz;
   }
 
+  /**
+   * @brief Return the euler angles from the given quaternion, with the given 
+   * rotation order (RO). 
+   * @param roo The rotation order (e.g. XYZ, XZY, ...)
+   * @param q The quaternion from which to extract the euler angles
+   */
+  inline glm::vec3 extractEulerAngleRO(RotOrder roo, const glm::quat& q)
+  {
+    return extractEulerAngleRO(roo, glm::mat3(q));
+  }
+
   inline glm::mat3 angleAxisMat3(float angle, const glm::vec3& axis)
   {
     return glm::toMat3(glm::angleAxis(angle, axis));

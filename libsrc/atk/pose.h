@@ -20,7 +20,8 @@ public:
   static Pose Squad(const Pose& p0, const Pose& p1, 
       const Pose& p2, const Pose& p3, float u);
 
-  //friend std::ostream& operator<<(std::ostream& s, const Pose& v);
+  friend std::ostream& operator<<(std::ostream& s, const Pose& v);
+  void deepCopy(const Pose& p);
 
 public:
   glm::vec3 rootPos;

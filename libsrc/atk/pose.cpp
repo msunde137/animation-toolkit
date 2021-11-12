@@ -3,7 +3,7 @@ using namespace glm;
 
 namespace atk {
 
-Pose::Pose() {}
+Pose::Pose() : rootPos(vec3(0)) {}
 Pose::~Pose() {}
 
 Pose::Pose(const glm::vec3& p) : rootPos(p)
@@ -22,8 +22,13 @@ Pose::Pose(const glm::vec3& pos, const glm::quat& rot) : rootPos(pos)
 
 Pose::Pose(const Pose& p)
 {
-  assert(jointRots.size() == 0);
+  deepCopy(p);
+}
+
+void Pose::deepCopy(const Pose& p)
+{
   rootPos = p.rootPos;
+  jointRots.clear();
   for (unsigned int i = 0; i < p.jointRots.size(); i++)
   {
     jointRots.push_back(p.jointRots[i]);
@@ -32,17 +37,11 @@ Pose::Pose(const Pose& p)
 
 Pose& Pose::operator = (const Pose& p)
 {
-  if (this == &p)
+  if (this != &p)
   {
-    return *this;
+    deepCopy(p);
   }
 
-  jointRots.clear();
-  rootPos = p.rootPos;
-  for (unsigned int i = 0; i < p.jointRots.size(); i++)
-  {
-    jointRots.push_back(p.jointRots[i]);
-  }
   return *this;
 }
 
@@ -59,7 +58,7 @@ Pose& Pose::operator = (const Pose& p)
    v.jointRots.push_back(q);
    }
    return s;
-   }
+   }*/
 
 std::ostream& operator<<(std::ostream& s, const Pose& v)
 {
@@ -72,7 +71,7 @@ std::ostream& operator<<(std::ostream& s, const Pose& v)
   s << ")\n";
   return s;
 }
-*/
+
 Pose Pose::Lerp(const Pose& key1, const Pose& key2, float u)
 {
   Pose pose;

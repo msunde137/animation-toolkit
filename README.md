@@ -12,6 +12,8 @@ Helpful Links:
 * [Assignment 04: You spin me round](https://brynmawr-cs317-f21.github.io/website/asst04-euler.html)
 * [Assignment 05: Quazy quaternions](https://brynmawr-cs317-f21.github.io/website/asst05-quat.html)
 * [Assignment 06: Building character](https://brynmawr-cs317-f21.github.io/website/asst06-transform.html)
+* [Assignment 07: A commotion of motion](https://brynmawr-cs317-f21.github.io/website/asst07-motion.html)
+* [Assignment 08: Blending in](https://brynmawr-cs317-f21.github.io/website/asst08-blend.html)
 
 # Tools and dependencies
 

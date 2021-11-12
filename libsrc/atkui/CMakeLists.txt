@@ -1,4 +1,5 @@
 set(SRC
+    skeleton_drawer.h
     framework.cpp
     )
 
