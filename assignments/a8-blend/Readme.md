@@ -1,7 +1,5 @@
 # Readme
 
-TODO: Replace this text with
+- made some circus performers
 
-* images, gifs, videos
-* brief description of what each image/gif/video shows
-
+![alt text](https://github.com/msunde137/animation-toolkit/blob/main/screenshots/circus.gif)
