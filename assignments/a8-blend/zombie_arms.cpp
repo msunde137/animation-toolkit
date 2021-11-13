@@ -21,10 +21,11 @@ public:
       _zombieOffset = ComputeArmOffset(_original);
    }
 
-   Motion ComputeArmOffset(const Motion& motion) {
+   Motion ComputeArmFreeze(const Motion& motion) {
       quat leftLocalRot = eulerAngleRO(XYZ, radians(vec3(-53, -88, -33)));
       quat rightLocalRot = eulerAngleRO(XYZ, radians(vec3(14, 88, -33)));
-      quat elbowLocalRot = eulerAngleRO(XYZ, radians(vec3(0, 23, 0)));
+      quat leftElbowLocalRot = eulerAngleRO(XYZ, radians(vec3(0, -23, 0)));
+      quat rightElbowLocalRot = eulerAngleRO(XYZ, radians(vec3(0, 23, 0)));
 
       Joint* leftArm = _skeleton.getByName("Beta:LeftArm");
       Joint* rightArm = _skeleton.getByName("Beta:RightArm");
@@ -32,18 +33,25 @@ public:
       Joint* leftElbow = _skeleton.getByName("Beta:LeftForeArm");
       Joint* rightElbow = _skeleton.getByName("Beta:RightForeArm");
 
-      Motion result;
+      Motion result = motion;
       result.setFramerate(motion.getFramerate());
-      // todo: your code here
-      result.appendKey(motion.getKey(0));
+      
+      for (int i = 0; i < result.getNumKeys(); i++)
+      {
+          Pose p = result.getKey(i);
+          p.jointRots[leftArm->getID()] = leftLocalRot;
+          p.jointRots[rightArm->getID()] = rightLocalRot;
+          p.jointRots[leftElbow->getID()] = leftElbowLocalRot;
+          p.jointRots[rightElbow->getID()] = rightElbowLocalRot;
+          result.editKey(i, p);
+      }
 
       return result;
    }
 
-   Motion ComputeArmFreeze(const Motion& motion) {
-      quat leftRot = eulerAngleRO(XYZ, radians(vec3(-53, -88, -33)));
-      quat rightRot = eulerAngleRO(XYZ, radians(vec3(14, 88, -33)));
-      quat elbowRot = eulerAngleRO(XYZ, radians(vec3(0, 23, 0)));
+   Motion ComputeArmOffset(const Motion& motion) {
+      quat leftElbowRot = eulerAngleRO(XYZ, radians(vec3(0, -23, 0)));
+      quat rightElbowRot = eulerAngleRO(XYZ, radians(vec3(0, 23, 0)));
 
       Joint* leftArm = _skeleton.getByName("Beta:LeftArm");
       Joint* rightArm = _skeleton.getByName("Beta:RightArm");
@@ -51,10 +59,22 @@ public:
       Joint* leftElbow = _skeleton.getByName("Beta:LeftForeArm");
       Joint* rightElbow = _skeleton.getByName("Beta:RightForeArm");
 
-      Motion result;
+      Motion result = motion;
       result.setFramerate(motion.getFramerate());
-      // todo: your code here
-      result.appendKey(motion.getKey(0));
+      int nk = result.getNumKeys();
+      for (int i = 0; i < nk; i++)
+      {
+          float f = i / (float)nk * glm::pi<float>() * 2.0f;
+          quat leftRot = eulerAngleRO(XYZ, radians(vec3(-53, -88, -33 + 30 * cos(f))));
+          quat rightRot = eulerAngleRO(XYZ, radians(vec3(14, 88, -33 + 30 * cos(f))));
+
+          Pose p = result.getKey(i);
+          p.jointRots[leftArm->getID()] = leftRot;
+          p.jointRots[rightArm->getID()] = rightRot;
+          p.jointRots[leftElbow->getID()] = leftElbowRot;
+          p.jointRots[rightElbow->getID()] = rightElbowRot;
+          result.editKey(i, p);
+      }
 
       return result;
    }

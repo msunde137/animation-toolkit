@@ -30,13 +30,17 @@ public:
 
    Motion reorient(const Motion& motion, const vec3& pos, float heading)
    {
-      Motion result;
+      Motion result = motion;
       result.setFramerate(motion.getFramerate());
 
       // todo: your code here
-      Pose pose = motion.getKey(0);
-      result.appendKey(pose);
-      
+      for (int i = 0; i < result.getNumKeys(); i++)
+      {
+          Pose p = result.getKey(i);
+          p.rootPos = pos;
+          p.jointRots[0] = glm::angleAxis(heading, vec3(0, 1, 0));
+          result.editKey(i, p);
+      }
       return result;
    }
 
@@ -57,13 +61,13 @@ public:
    {
       if (key == GLFW_KEY_LEFT)
       {
-         _heading += M_PI/8;
+         _heading += 3.14159f/8;
          _reoriented = reorient(_motion, _offset, _heading);
          _time = 0;
       }
       else if (key == GLFW_KEY_RIGHT)
       {
-         _heading -= M_PI/8;
+         _heading -= 3.14159f/8;
          _reoriented = reorient(_motion, _offset, _heading);
          _time = 0;
       }

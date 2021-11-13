@@ -1,0 +1,9 @@
+﻿{
+  // See https://go.microsoft.com//fwlink//?linkid=834763 for more information about this file.
+  "configurations": [
+    {
+      "name": "atk",
+      "cacheRoot": "C:\\NerdThings\\VSSolutions\\Computer Animation\\animation-toolkit\\build"
+    }
+  ]
+}
