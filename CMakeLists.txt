@@ -81,7 +81,7 @@ elseif (APPLE)
   #  message("No AntTweakBar")
   #  set(CORE ${GL_LIB} ${GL_GLUT})
   #endif()
-  set(CORE atkui atk agl ${GL_LIB} ${GLEW} ${GLFW})
+  set(CORE atkui atk atkmath agl ${GL_LIB} ${GLEW} ${GLFW})
 
 
 elseif (UNIX)
@@ -123,7 +123,7 @@ elseif (UNIX)
   #  message("No AntTweakBar")
   #  set(CORE GLEW glfw glut GL GLU X11)
   #endif()
-  set(CORE atkui atk agl GLEW glfw GL GLU X11 dl)
+  set(CORE atkui atkmath atk agl GLEW glfw GL GLU X11 dl)
 
 endif()
 

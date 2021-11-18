@@ -34,6 +34,19 @@ public:
          f.drawEllipsoid(p1, p2, jointRadius);
          f.drawSphere(p2, jointRadius);
          f.drawSphere(p1, jointRadius);
+
+         if (showAxes) {
+            f.beginShader("unlit");
+            const atk::Transform& T = joint->getLocal2Global();
+            glm::vec3 X = T.transformVector(2 * jointRadius * glm::vec3(1,0,0));
+            glm::vec3 Y = T.transformVector(2 * jointRadius * glm::vec3(0,1,0));
+            glm::vec3 Z = T.transformVector(2 * jointRadius * glm::vec3(0,0,1));
+
+            f.setColor(glm::vec3(1,0,0)); f.drawLine(p1, p1 + X);
+            f.setColor(glm::vec3(0,1,0)); f.drawLine(p1, p1 + Y);
+            f.setColor(glm::vec3(0,0,1)); f.drawLine(p1, p1 + Z);
+            f.endShader();
+         }
       }
       f.pop();
    }
@@ -42,6 +55,7 @@ public:
    glm::vec3 color = glm::vec3(0.1,0.3,1.0);
    glm::vec3 size = glm::vec3(1.0);
    glm::vec3 pos = glm::vec3(0);
+   bool showAxes = false;
 };
 
 }  // end namespace atkui

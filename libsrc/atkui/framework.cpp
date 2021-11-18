@@ -1,8 +1,11 @@
 #include "atkui/framework.h"
 #include <algorithm>
 
+using glm::vec4;
 using glm::vec3;
 using namespace atkmath;
+using glm::vec2;
+using glm::mat4;
 
 namespace atkui {
 
@@ -181,4 +184,48 @@ void Framework::transform(const glm::mat4& trs) {
   renderer.transform(trs);
 }
 
+void Framework::drawCircle(const vec3& p, float r, int numVertices) {
+  int vertices = numVertices;
+  float angle = (2 * 3.14) / vertices;
+  for (int i = 0; i < vertices; i++) {
+    vec3 p1 = p + vec3(r * cos(i*angle), r * sin(i*angle), 0);
+    vec3 p2 = p + vec3(r * cos((i+1)*angle), r * sin((i+1)*angle), 0);
+    drawLine(p1, p2);
+  }
 }
+
+void Framework::beginShader(const std::string& name) {
+  renderer.beginShader(name);
+}
+
+void Framework::endShader() {
+  renderer.endShader();
+}
+
+vec2 Framework::worldToScreen(const vec3& p) {
+  mat4 projection = renderer.projectionMatrix();
+  mat4 view = renderer.viewMatrix();
+
+  vec4 projectedPos = projection * view * vec4(p, 1.0);
+  vec3 ndcPos = vec3(projectedPos) / projectedPos.w;
+
+  vec2 screenPos = (vec2(ndcPos) + vec2(1.0)) * 0.5f;
+  screenPos = screenPos * vec2(width(), height());
+
+  return screenPos;
+}
+
+glm::vec3 Framework::screenToWorld(const glm::vec2& screenPos) {
+  vec2 spos = vec2(screenPos)/ vec2(width(), height());
+  spos = 2.0f * spos - vec2(1.0f); 
+  
+  vec4 ndcPos = vec4(spos, 0, 1); 
+  mat4 projection = renderer.projectionMatrix();
+  mat4 view = renderer.viewMatrix();
+
+  vec4 pos = inverse(view) * inverse(projection) * ndcPos;
+  return vec3(pos);
+}
+
+}
+

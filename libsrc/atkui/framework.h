@@ -39,6 +39,12 @@ class Framework : public agl::Window {
   virtual void drawFloor(float size, float big = 200, float small = 50);
   virtual void drawText(const std::string& msg, float x, float y); // x in [0, width]; y in [0, height]
   virtual void drawEllipsoid(const glm::vec3& a, const glm::vec3& b, float width); 
+  virtual void drawCircle(const glm::vec3& p, float r, int numVertices = 20);
+  virtual void beginShader(const std::string& name);
+  virtual void endShader();
+
+  virtual glm::vec2 worldToScreen(const glm::vec3& p);
+  virtual glm::vec3 screenToWorld(const glm::vec2& screenPos);
 
  private:
   glm::vec3 _color;
