@@ -55,6 +55,7 @@ public:
       update();
       SkeletonDrawer drawer;
       drawer.draw(_skeleton, *this);
+      drawFloor(400);
    }
 
    void keyUp(int key, int mods) 

@@ -37,7 +37,44 @@ public:
     int start1 = motion1_.getNumKeys() - numBlendFrames;
     int start2 = 0;
 
-    // TODO: Your code here
+    blend_.setFramerate(motion1_.getFramerate());
+
+    for (int i = 0; i < start1; i++)
+        blend_.appendKey(motion1_.getKey(i));
+    
+    for (; start2 < numBlendFrames; start1++, start2++)
+    {
+        Pose p = motion1_.getKey(start1);
+        //p.rootPos.y = offset.y;
+        float t = (float)start2 / (float)numBlendFrames;
+        for (int i = 0; i < p.jointRots.size(); i++)
+        {
+            glm::quat r1 = motion1_.getKey(start1).jointRots[i];
+            glm::quat r2 = motion2_.getKey(start2).jointRots[i];
+            p.jointRots[i] = slerp(r1, r2, t);
+        }
+
+        vec3 offset = motion2_.getKey(start1).rootPos;
+        int rootid = skeleton_.getRoot()->getID();
+        glm::quat r1 = motion1_.getKey(start1).jointRots[rootid];
+        p.jointRots[rootid] = r1;
+        p.rootPos = motion1_.getKey(start1).rootPos * (1 - t) + r1 * motion2_.getKey(start2).rootPos * t;
+        p.rootPos = motion1_.getKey(start1).rootPos;
+        blend_.appendKey(p);
+    }
+    for (int i = start2; i < motion2_.getNumKeys(); i++)
+    {
+        Pose p = motion2_.getKey(i);
+        vec3 offset = motion1_.getKey(start1 - 1).rootPos;
+
+        int rootid = skeleton_.getRoot()->getID();
+        glm::quat r1 = motion1_.getKey(start1 - 1).jointRots[rootid];
+        p.jointRots[rootid] = r1;
+        p.rootPos = vec3(offset.x, 0, offset.z) + r1 * p.rootPos;
+        blend_.appendKey(p);
+        //break;
+    }
+    
   }
 
   void save(const std::string &filename)
@@ -50,6 +87,7 @@ public:
   {
     blend_.update(skeleton_, elapsedTime());
     drawer_.draw(skeleton_, *this);
+    drawFloor(400);
   }
 
 private:
@@ -69,8 +107,10 @@ std::string PruneName(const std::string &name)
 
 int main(int argc, char **argv)
 {
-  std::string motion1 = "../motions/Beta/walking.bvh";
-  std::string motion2 = "../motions/Beta/jump.bvh";
+  //std::string motion1 = "../motions/Beta/walking.bvh";
+  //std::string motion2 = "../motions/Beta/jump.bvh";
+  std::string motion2 = "../motions/Beta/walking.bvh";
+  std::string motion1 = "../motions/Beta/right_turn_90.bvh";
   int numFrames = 10;
 
   try
