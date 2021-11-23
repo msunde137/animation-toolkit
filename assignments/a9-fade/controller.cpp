@@ -30,18 +30,15 @@ public:
   virtual void scene()
   {
     update();
-    _drawer.draw(_skeleton, *this);
 
     // draw heading
     vec3 p = _skeleton.getRoot()->getGlobalTranslation();
     p[1] = 10; // set height close above the floor
-
     vec3 forward = glm::angleAxis(_heading, vec3(0, 1, 0)) * vec3(0, 0, 1);
-    vec3 pos = forward * -400.0f + vec3(0, 300, 0);
-    vec3 look = p;
-    vec3 up = cross(look - pos, -cross(vec3(0, 1, 0), pos));
-    //camera.set(vec3(-10, 100, 0), vec3(0, 0, 1), vec3(1, 0, 0));
-    camera.set(pos, look, up);
+    vec3 pos = p + forward * -400.0f + vec3(0, 200, 0);
+    vec3 look = _skeleton.getByName("Beta:Head")->getGlobalTranslation();
+    vec3 up = vec3(0, 1, 0); // cross(look - pos, -cross(vec3(0, 1, 0), pos));
+    lookAt(pos, look, up);
     setColor(vec3(0, 1, 1));
     push();
     translate(p);
@@ -52,6 +49,7 @@ public:
     pop();
 
     drawFloor(400);
+    _drawer.draw(_skeleton, *this);
   }
 
   virtual void update()
@@ -67,13 +65,13 @@ public:
     if (keyIsDown('D'))
     {
         _heading -= 0.05f;
-    for (int i = 0; i < _walk.getNumKeys(); i++)
-    {
-        Pose p = _walk.getKey(i);
-        int id = _skeleton.getRoot()->getID();
-        p.jointRots[id] = glm::rotate(p.jointRots[id], -0.05f, vec3(0, 1, 0));
-        _walk.editKey(i, p);
-    }
+        for (int i = 0; i < _walk.getNumKeys(); i++)
+        {
+            Pose p = _walk.getKey(i);
+            int id = _skeleton.getRoot()->getID();
+            p.jointRots[id] = p.jointRots[id] * glm::angleAxis(-.05f, vec3(0, 1, 0));
+            _walk.editKey(i, p);
+        }
     }
     if (keyIsDown('A'))
     {
@@ -82,9 +80,15 @@ public:
         {
             Pose p = _walk.getKey(i);
             int id = _skeleton.getRoot()->getID();
-            p.jointRots[id] = glm::rotate(p.jointRots[id], 0.05f, vec3(0, 1, 0));
+            p.jointRots[id] = p.jointRots[id] * glm::angleAxis(.05f, vec3(0, 1, 0));
             _walk.editKey(i, p);
         }
+    }
+    for (int i = 0; i < _walk.getNumKeys(); i++)
+    {
+        Pose p = _walk.getKey(i);
+        p.rootPos += glm::angleAxis(_heading, vec3(0, 1, 0)) * vec3(0, 0, 150) * dt();
+        _walk.editKey(i, p);
     }
   }
 

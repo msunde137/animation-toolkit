@@ -45,7 +45,6 @@ public:
     for (; start2 < numBlendFrames; start1++, start2++)
     {
         Pose p = motion1_.getKey(start1);
-        //p.rootPos.y = offset.y;
         float t = (float)start2 / (float)numBlendFrames;
         for (int i = 0; i < p.jointRots.size(); i++)
         {
@@ -57,7 +56,7 @@ public:
         vec3 offset = motion2_.getKey(start1).rootPos;
         int rootid = skeleton_.getRoot()->getID();
         glm::quat r1 = motion1_.getKey(start1).jointRots[rootid];
-        p.jointRots[rootid] = r1;
+        p.jointRots[rootid] = r1 * ;
         p.rootPos = motion1_.getKey(start1).rootPos * (1 - t) + r1 * motion2_.getKey(start2).rootPos * t;
         p.rootPos = motion1_.getKey(start1).rootPos;
         blend_.appendKey(p);
@@ -107,10 +106,10 @@ std::string PruneName(const std::string &name)
 
 int main(int argc, char **argv)
 {
-  //std::string motion1 = "../motions/Beta/walking.bvh";
-  //std::string motion2 = "../motions/Beta/jump.bvh";
-  std::string motion2 = "../motions/Beta/walking.bvh";
-  std::string motion1 = "../motions/Beta/right_turn_90.bvh";
+  std::string motion1 = "../motions/Beta/walking.bvh";
+  std::string motion2 = "../motions/Beta/jump.bvh";
+  //std::string motion2 = "../motions/Beta/walking.bvh";
+  //std::string motion1 = "../motions/Beta/right_turn_90.bvh";
   int numFrames = 10;
 
   try
