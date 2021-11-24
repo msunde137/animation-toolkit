@@ -37,6 +37,8 @@ public:
     int start1 = motion1_.getNumKeys() - numBlendFrames;
     int start2 = 0;
 
+    quat rotOffset = motion1_.getKey(motion1_.getNumKeys()-1).jointRots[0];
+
     blend_.setFramerate(motion1_.getFramerate());
 
     for (int i = 0; i < start1; i++)
@@ -52,13 +54,12 @@ public:
             glm::quat r2 = motion2_.getKey(start2).jointRots[i];
             p.jointRots[i] = slerp(r1, r2, t);
         }
-
-        vec3 offset = motion2_.getKey(start1).rootPos;
+        vec3 offset = motion1_.getKey(start1 - 1).rootPos;
         int rootid = skeleton_.getRoot()->getID();
         glm::quat r1 = motion1_.getKey(start1).jointRots[rootid];
-        p.jointRots[rootid] = r1 * ;
-        p.rootPos = motion1_.getKey(start1).rootPos * (1 - t) + r1 * motion2_.getKey(start2).rootPos * t;
-        p.rootPos = motion1_.getKey(start1).rootPos;
+        p.jointRots[0] = slerp(motion1_.getKey(start1).jointRots[0],
+            rotOffset * motion2_.getKey(start2).jointRots[0], t);
+        p.rootPos = motion1_.getKey(start1).rootPos * (1 - t) + (vec3(offset.x, 0, offset.z) + r1 * motion2_.getKey(start2).rootPos) * t;
         blend_.appendKey(p);
     }
     for (int i = start2; i < motion2_.getNumKeys(); i++)
@@ -68,7 +69,7 @@ public:
 
         int rootid = skeleton_.getRoot()->getID();
         glm::quat r1 = motion1_.getKey(start1 - 1).jointRots[rootid];
-        p.jointRots[rootid] = r1;
+        p.jointRots[rootid] = r1 * p.jointRots[rootid];
         p.rootPos = vec3(offset.x, 0, offset.z) + r1 * p.rootPos;
         blend_.appendKey(p);
         //break;
