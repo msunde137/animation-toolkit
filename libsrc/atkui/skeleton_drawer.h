@@ -16,14 +16,13 @@ public:
    }
    virtual ~SkeletonDrawer() {}
 
-   void draw(const atk::Skeleton& skeleton, atkui::Framework& f) {
+   virtual void draw(const atk::Skeleton& skeleton, atkui::Framework& f) {
 
       f.push();
       f.translate(pos);
       f.scale(size);
       f.setColor(color);
 
-      float jointRadius = 10;
       for (int i = 0; i < skeleton.getNumJoints(); i++) {
          atk::Joint* joint = skeleton.getByID(i);
          if (joint->getParent() == 0) continue;
@@ -56,6 +55,7 @@ public:
    glm::vec3 size = glm::vec3(1.0);
    glm::vec3 pos = glm::vec3(0);
    bool showAxes = false;
+   float jointRadius = 10;
 };
 
 }  // end namespace atkui
