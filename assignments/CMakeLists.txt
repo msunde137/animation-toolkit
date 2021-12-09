@@ -1,0 +1,13 @@
+set(LIBS ${CORE})
+
+add_subdirectory(a0-start)
+add_subdirectory(a1-hello)
+add_subdirectory(a2-interpolation)
+add_subdirectory(a3-splines)
+add_subdirectory(a4-euler)
+add_subdirectory(a5-quat)
+add_subdirectory(a6-transform)
+add_subdirectory(a7-motion)
+add_subdirectory(a8-blend)
+add_subdirectory(a9-fade)
+add_subdirectory(a10-ik)
