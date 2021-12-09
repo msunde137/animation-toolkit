@@ -60,7 +60,7 @@ void Framework::drawFloor(float size, float big, float small) {
   renderer.setUniform("uFog.minDist", 0.75f * size);
   renderer.setUniform("uFog.maxDist", size);
   renderer.push();
-  renderer.scale(vec3(size, 0, size));
+  renderer.scale(vec3(size, 1, size));
   renderer.plane();
   renderer.pop();
   renderer.endShader();
@@ -221,10 +221,13 @@ glm::vec3 Framework::screenToWorld(const glm::vec2& screenPos) {
   
   vec4 ndcPos = vec4(spos, 0, 1); 
   mat4 projection = renderer.projectionMatrix();
-  mat4 view = renderer.viewMatrix();
+  ndcPos = inverse(projection) * ndcPos;
+  ndcPos = ndcPos / ndcPos.w; // re-project onto a point
 
-  vec4 pos = inverse(view) * inverse(projection) * ndcPos;
-  return vec3(pos);
+  mat4 view = renderer.viewMatrix();
+  ndcPos = inverse(view) * ndcPos;
+
+  return vec3(ndcPos);
 }
 
 }
